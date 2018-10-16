@@ -1,11 +1,4 @@
 # HTML Webpack Template Pug
-[![Build Status](https://travis-ci.org/Velenir/html-webpack-template-pug.svg?branch=master)](https://travis-ci.org/Velenir/html-webpack-template-pug)
-[![npm version](https://badge.fury.io/js/html-webpack-template-pug.svg)](https://badge.fury.io/js/html-webpack-template-pug)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![devDependencies](https://david-dm.org/velenir/html-webpack-template-pug/dev-status.svg)](https://david-dm.org/velenir/html-webpack-template-pug?type=dev)
-[![peerDependencies](https://david-dm.org/velenir/html-webpack-template-pug/peer-status.svg)](https://david-dm.org/velenir/html-webpack-template-pug?type=peer)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/velenir/html-webpack-template-pug/blob/master/LICENSE)
-
 This is a [Pug](https://pugjs.org/) template for the [webpack](http://webpack.github.io/) plugin [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin). Inspired by another template, [html-webpack-template](https://github.com/jaketrent/html-webpack-template).
 
 In addition to the options that should cover most needs of a single-page app, a custom Pug file can be used to extend the provided **layout.pug** or to completely rewrite the template while utilizing mixins from **mixins.pug**.
@@ -17,13 +10,13 @@ Loading the template requires that [pug-loader](https://github.com/pugjs/pug-loa
 Install the template with npm:
 
 ```shell
-npm install html-webpack-template-pug --save-dev
+npm install html-webpack-template-pug-plugin --save-dev
 ```
 
 or together with peer dependencies:
-
+html-webpack-template-pug-plugin
 ```shell
-npm install pug pug-loader html-webpack-plugin html-webpack-template-pug --save-dev
+npm install pug pug-loader html-webpack-plugin html-webpack-template-pug-plugin --save-dev
 ```
 
 ## Basic Usage
@@ -80,6 +73,20 @@ Optional parameters:
 		
 - `injectExtras.body: [tag,...]` -- Same as `injectExtras.head` but to be injected at the bottom of the `<body>`.
 
+- `injectExtras.variable: {...}` inject variable
+
+  ```javascript
+    injectExtras: {
+      variable:{
+        times_tamp: Date.now()
+      }
+    }
+  ```
+  
+  ```javascript
+    +injectExtrasVariable
+    #{customVariable.times_tamp}
+  ```
 
 And other options from [html-webpack-plugin#configuration](https://github.com/ampedandwired/html-webpack-plugin#configuration).
 
@@ -94,8 +101,8 @@ An example of webpack configuration utilizing the options above:
     new HtmlWebpackPlugin({
       // Required
       inject: false,
-      template: require('html-webpack-template-pug'),
-      // template: '!!pug-loader!node_modules/html-webpack-template-pug/layout.pug'
+      template: require('html-webpack-template-pug-plugin'),
+      // template: '!!pug-loader!node_modules/html-webpack-template-pug-plugin/layout.pug'
       
       // Optional
       appMountId: 'app',
@@ -161,8 +168,8 @@ An example of webpack configuration with extracting a CSS-only entry chunk:
     new HtmlWebpackPlugin({
       // Required
       inject: false,
-      template: require('html-webpack-template-pug'),
-      // template: '!!pug-loader!node_modules/html-webpack-template-pug/layout.pug'
+      template: require('html-webpack-template-pug-plugin'),
+      // template: '!!pug-loader!node_modules/html-webpack-template-pug-plugin/layout.pug'
       
       // Optional
       excludeJSChunks: 'style',	// don't include specific chunks in scripts (when .js is a byproduct of an already extracted .css)
@@ -179,7 +186,7 @@ An example of webpack configuration with extracting a CSS-only entry chunk:
 
 ## Intermediate Usage
 
-The **layout.pug** that is used by default with `require('html-webpack-template-pug')` amounts to the following:
+The **layout.pug** that is used by default with `require('html-webpack-template-pug-plugin')` amounts to the following:
 
 ```pug
 include ./mixins.pug
@@ -216,7 +223,7 @@ And can be extended like any other **.pug** template:
 ```pug
 //- index.pug
 //- include/extends ~%PATH% resolves to node_modules/%PATH%
-extends ~html-webpack-template-pug/layout.pug
+extends ~html-webpack-template-pug-plugin/layout.pug
 
 block head
 	link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css")
@@ -412,7 +419,7 @@ A custom template can then look like this:
 ```pug
 //- index.pug
 //- include/extends ~%PATH% resolves to node_modules/%PATH%
-include ~html-webpack-template-pug/mixins.pug
+include ~html-webpack-template-pug-plugin/mixins.pug
 
 doctype html
 html(lang='en')
@@ -459,4 +466,4 @@ An example of webpack configuration with a custom template including the default
 
 # License
 
-This software is licensed under [MIT](https://github.com/velenir/html-webpack-template-pug/blob/master/LICENSE).
+This software is licensed under [MIT](https://github.com/sunsipeng/html-webpack-template-pug/blob/master/LICENSE).

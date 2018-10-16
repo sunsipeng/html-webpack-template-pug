@@ -4,6 +4,7 @@ if !htmlWebpackPlugin.options
 //- adds title, to be used in <head>
 mixin title
 	title= htmlWebpackPlugin.options.title
+	
 
 //- adds favicon, to be used in <head>
 mixin favicon
@@ -69,7 +70,11 @@ mixin injectExtrasHead
 mixin injectExtrasBody
 	if htmlWebpackPlugin.options.injectExtras && htmlWebpackPlugin.options.injectExtras.body
 		+injectExtras(htmlWebpackPlugin.options.injectExtras.body)
-				
+//- 
+	injects extra resources passed in injectExtras.variable of htmlWebpackPlugin.options					
+mixin injectExtrasVariable
+	if htmlWebpackPlugin.options.injectExtras && htmlWebpackPlugin.options.injectExtras.variable
+		- customVariable = Object.assign({}, htmlWebpackPlugin.options.injectExtras.variable)
 
 - const inlined = new Set(), injected = new Set();
 - const cssToInline = new Set(), cssToInject = new Set(), jsToInline = new Set(), jsToInject = new Set();

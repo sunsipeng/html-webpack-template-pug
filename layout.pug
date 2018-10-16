@@ -16,9 +16,10 @@ html(lang='en', manifest=htmlWebpackPlugin.files.manifest)
 		block head
 
 	body
-
+		
 		block content
 			+appMount
+			+injectExtrasVariable
 			
 		block defaultBody
 			+injectExtrasBody
